@@ -50,6 +50,7 @@ function Memotest() {
   useEffect(() => {
     if (guessed.length == images.length) {
       alert("Ganaste!");
+      
       location.reload();
     }
   }, [guessed]);
@@ -58,7 +59,8 @@ function Memotest() {
   //retorno una unica unordered list y dentro de ella mapeo cada una de las imagenes dentro de un list item
   //aplico condiciones a la imagen del list item segun ya esten dentro de las seleccionadas o las adivinadas, sino mostrare la imagen por defecto!
   return (
-    <ul style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px",}}>
+    <>
+    <ul style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px", backgroundColor:"#1b263b",border:"solid 4px #666",padding:"20px",borderRadius:"10px"}}>
       {images.map((img) => {
         const [, url] = img.split("|");
         return (
@@ -70,6 +72,8 @@ function Memotest() {
         );
       })}
     </ul>
+      { (guessed.length == images.length) && <h1 style={{ margin:"10px auto",textAlign:"center",border:"solid 3px #444",width:"100%"}}>Congratulations!!</h1>}
+    </>
   );
 }
 
