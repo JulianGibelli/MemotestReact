@@ -29,6 +29,9 @@ function Memotest() {
   const [guessed, setGuessed] = useState<string[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
 
+  //useEffect que actuara cada vez que cambien los seleccionados
+  //si seleccione 2 cartas y las url de las seleccionadas coinciden, agrega esas seleccionadas a adivinadas y setea guessed
+  //si no son iguales, limpio las seleccionadas con un timeout al 1seg
   useEffect(() => {
     if (selected.length == 2) {
       if (selected[0].split("|")[1] == selected[1].split("|")[1]) {
@@ -41,6 +44,9 @@ function Memotest() {
     }
   }, [selected]);
 
+  //useEffect que actuara cada vez que cambien los adivinados
+  //si la cantidad de adivinados coincide con longitud de array de imagenes es porque adivine todos!
+  //alerto al usuario y refresco la pagina
   useEffect(() => {
     if (guessed.length == images.length) {
       alert("Ganaste!");
@@ -48,6 +54,9 @@ function Memotest() {
     }
   }, [guessed]);
 
+  //con conditional rendering voy mostrando o no las cartas segun ya esten adivinadas o no
+  //retorno una unica unordered list y dentro de ella mapeo cada una de las imagenes dentro de un list item
+  //aplico condiciones a la imagen del list item segun ya esten dentro de las seleccionadas o las adivinadas, sino mostrare la imagen por defecto!
   return (
     <ul
       style={{
