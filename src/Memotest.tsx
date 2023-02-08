@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+//array de link de imagenes de tecnologias (10)
+//se aplica un flatmap para que por cada imagen devuelva un conjunto "a|imagen b|imagen"
+//luego se hace un flatMap para obtener un nivel de array
+//y se le aplica un sort para generar un random de las imagenes en cuestion
 const images = [
   "https://icongr.am/devicon/angularjs-original.svg?size=128&color=currentColor",
   "https://icongr.am/devicon/babel-original.svg?size=128&color=currentColor",
@@ -17,7 +21,11 @@ const images = [
   })
   .sort(() => Math.random() - 0.5);
 
+
+
+//Componente memotest principal  
 function Memotest() {
+  //2 estados: para los seleccionados y los adivinados  
   const [guessed, setGuessed] = useState<string[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
 
