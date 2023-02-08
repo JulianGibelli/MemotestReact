@@ -58,34 +58,14 @@ function Memotest() {
   //retorno una unica unordered list y dentro de ella mapeo cada una de las imagenes dentro de un list item
   //aplico condiciones a la imagen del list item segun ya esten dentro de las seleccionadas o las adivinadas, sino mostrare la imagen por defecto!
   return (
-    <ul
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",
-        gap: "24px",
-      }}
-    >
+    <ul style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px",}}>
       {images.map((img) => {
         const [, url] = img.split("|");
         return (
-          <li
-            onClick={() =>
-              selected.length < 2 &&
-              setSelected((selected) => selected.concat(img))
-            }
-            style={{
-              padding: 4,
-              border: "solid 1px #666",
-              borderRadius: "10px",
-              cursor: "pointer",
-            }}
-            key={img}
-          >
-            {guessed.includes(img) || selected.includes(img) ? (
-              <img key={img} src={url} alt="icon" />
-            ) : (
-              <img src="https://icongr.am/clarity/eye.svg?size=128&color=e65b5b" />
-            )}
+          <li onClick={() =>selected.length < 2 && setSelected((selected) => selected.concat(img))} style={{padding: 4,border: "solid 1px #666",borderRadius: "10px",cursor: "pointer"}} key={img}>
+
+            {guessed.includes(img) || selected.includes(img) ? (<img key={img} src={url} alt="icon" />)
+             : (<img src="https://icongr.am/clarity/eye.svg?size=128&color=e65b5b" />)}
           </li>
         );
       })}
