@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Memotest from "./Memotest";
+import { ToastContainer,Slide } from 'react-toastify';
+
+
 
 function App() {
   return (
@@ -8,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Memotest />} />
       </Routes>
+     <ToastContainer autoClose={1500} transition={Slide}/> 
     </BrowserRouter>
   );
 }

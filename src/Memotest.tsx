@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 //array de link de imagenes de tecnologias (10)
 //se aplica un flatmap para que por cada imagen devuelva un conjunto "a|imagen b|imagen"
@@ -21,14 +25,15 @@ const images = [
   })
   .sort(() => Math.random() - 0.5);
 
-
-
-//Componente memotest principal  
-function Memotest() {
-  //2 estados: para los seleccionados y los adivinados  
-  const [guessed, setGuessed] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string[]>([]);
-
+  
+  
+  //Componente memotest principal  
+  function Memotest() {
+    //2 estados: para los seleccionados y los adivinados  
+    const [guessed, setGuessed] = useState<string[]>([]);
+    const [selected, setSelected] = useState<string[]>([]);
+    
+    const notify = () => toast("You won!");
   //useEffect que actuara cada vez que cambien los seleccionados
   //si seleccione 2 cartas y las url de las seleccionadas coinciden, agrega esas seleccionadas a adivinadas y setea guessed
   //si no son iguales, limpio las seleccionadas con un timeout al 1seg
@@ -49,11 +54,11 @@ function Memotest() {
   //alerto al usuario y refresco la pagina
   useEffect(() => {
     if (guessed.length == images.length) {
+      notify()
       setTimeout(()=>{
-        alert("Ganaste!");
         location.reload();
 
-      },1000)
+      },2000)
       
     }
   }, [guessed]);
@@ -64,6 +69,8 @@ function Memotest() {
   return (
     <>
     <ul className="border-gradient border-gradient-purple" style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px",padding:"20px"}}>
+    
+
       {images.map((img) => {
         const [, url] = img.split("|");
         return (
