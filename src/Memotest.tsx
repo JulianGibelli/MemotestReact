@@ -49,9 +49,12 @@ function Memotest() {
   //alerto al usuario y refresco la pagina
   useEffect(() => {
     if (guessed.length == images.length) {
-      alert("Ganaste!");
+      setTimeout(()=>{
+        alert("Ganaste!");
+        location.reload();
+
+      },1000)
       
-      location.reload();
     }
   }, [guessed]);
 
@@ -60,11 +63,11 @@ function Memotest() {
   //aplico condiciones a la imagen del list item segun ya esten dentro de las seleccionadas o las adivinadas, sino mostrare la imagen por defecto!
   return (
     <>
-    <ul style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px", backgroundColor:"#1b263b",border:"solid 4px #666",padding:"20px",borderRadius:"10px"}}>
+    <ul className="border-gradient border-gradient-purple" style={{display: "grid",gridTemplateColumns: "repeat(auto-fill,minmax(128px,1fr))",gap: "24px",padding:"20px"}}>
       {images.map((img) => {
         const [, url] = img.split("|");
         return (
-          <li onClick={() =>selected.length < 2 && setSelected((selected) => selected.concat(img))} style={{padding: 4,border: "solid 1px #666",borderRadius: "10px",cursor: "pointer"}} key={img}>
+          <li onClick={() =>selected.length < 2 && setSelected((selected) => selected.concat(img))} style={{padding: 4,border: "solid 1px #666",borderRadius: "10px",cursor: "url(https://img.icons8.com/color/48/null/tap-gesture.png), pointer"}} key={img}>
 
             {guessed.includes(img) || selected.includes(img) ? (<img key={img} src={url} alt="icon" />)
              : (<img src="https://icongr.am/clarity/eye.svg?size=128&color=e65b5b" />)}
@@ -72,9 +75,11 @@ function Memotest() {
         );
       })}
     </ul>
-      { (guessed.length == images.length) && <h1 style={{ margin:"10px auto",textAlign:"center",border:"solid 3px #444",width:"100%"}}>Congratulations!!</h1>}
+      { (guessed.length == images.length) && <h2 style={{ margin:"10px auto",textAlign:"center",border:"solid 3px #444",width:"100%"}}>Congratulations!!</h2>}
     </>
   );
 }
 
 export default Memotest;
+
+
